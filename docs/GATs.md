@@ -37,11 +37,11 @@ $$
 
 * 归一化：**Softmax**
 
-$$
+```math
 a_{ij} = \frac
 {exp(LeakyReLU(e_{ij}))}
 {\sum_{k \in \mathcal{N}_i}exp(LeakyReLU(e_{ik})) }
-$$
+```
 
 ### Aggregate
 
@@ -73,13 +73,13 @@ $$
 
 ### LeakyReLU
 
-$$
+```math
 LeakyReLU(x) = 
 \left\{\begin{array}{ll}
 x & \text { if } x \geq 0 \\
 \alpha x & \text { if } x<0
 \end{array}\right.
-$$
+```
 
 * LeakyReLU在输入值为正时，输出与ReLU相同，但**在输入值为负时，输出一个小的线性值**
 
