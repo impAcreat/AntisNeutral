@@ -47,9 +47,9 @@ W
 )
 $$
 
-> $\widetilde{A} = A + I$：$I$  为单位矩阵
+> $\widetilde{A} = A + I$：I 为单位矩阵
 >
-> $\widetilde{D}_{ii} = \sum_j \widetilde{A}_{ij}$ ：为A的度矩阵
+> $\widetilde{D} _{ii}=\sum_j\widetilde{A} _{ij}$ ：为A的度矩阵
 >
 > $H$ ：是每一层的特征矩阵，输入层即为X
 >
@@ -86,7 +86,8 @@ $$
 
 * 改进原理：
 
-1. Step 1：$\widetilde{D}^{-1}\widetilde{A}$
+1. Step 1：
+$\widetilde{D}^{-1}\widetilde{A}$
 
    * 从上图可以看出，用 $\widetilde{D}^{-1}$ 处理相当于进行**加权平均**：加权平均的想法在于那些具有较低度的结点会对其邻居有较大的影响，而高度的结点会产生更小的影响因为他们的影响会被分散给很多的邻居结点
 
@@ -96,13 +97,15 @@ $$
 
 <img src="https://topb0ts.wpenginepowered.com/wp-content/uploads/2020/10/1_o7jb9GT_ePKE6c9hHy9XEw.png" alt="img" style="zoom:67%;" />
 
-2. Step 2：$\widetilde{D}^{-1}\widetilde{A}\widetilde{D}^{-1}$，添加对列的标准化
+2. Step 2：
+   $\widetilde{D}^{-1}\widetilde{A}\widetilde{D}^{-1}$，添加对列的标准化
 
    * 两次标准化将值缩小过多
 
    ![graph convolutional network](https://topb0ts.wpenginepowered.com/wp-content/uploads/2020/10/1_FLQi-BEivJgztalgq7xIOwedited.png)
 
-3. Step 3：$\widetilde{D}^{-\frac{1}{2}} \widetilde{A} \widetilde{D}^{-\frac{1}{2}} $
+3. Step 3：
+   $\widetilde{D}^{-\frac{1}{2}} \widetilde{A} \widetilde{D}^{-\frac{1}{2}} $
 
 <img src="https://topb0ts.wpenginepowered.com/wp-content/uploads/2020/10/1_cfx8c0lEAm7RQEl-Jn19uA.png" alt="img" style="zoom:80%;" />
 
