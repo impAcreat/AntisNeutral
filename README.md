@@ -12,6 +12,8 @@
 * run & debug
 * experiment
 
+****
+
 ## Schedule(2024)
 ### Model Construction
 * 6.24-6.25: Theory knowledge learning & understand used model
