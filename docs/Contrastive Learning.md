@@ -51,9 +51,9 @@
 * 核心思想：最大化正样本对与最小化负样本对之间的相似性
 * 假设我们有一个查询（query）向量 q 和一个正样本向量 k+，以及 K 个负样本向量 {k−}，InfoNCE损失可以定义为：
 
-$$
-\mathcal{L}_{\text {InfoNCE }}=-\log \frac{\exp \left(q \cdot k^{+} / \tau\right)}{\exp \left(q \cdot k^{+} / \tau\right)+\sum_{i=1}^{K} \exp \left(q \cdot k_{i}^{-} / \tau\right)}
-$$
+```math
+ \mathcal{L}_{InfoNCE} = -log\frac{exp (q \cdot k^{+} / \tau)}{exp (q \cdot k^{+} / \tau ) + {\sum}^K_{i=1} exp (q \cdot k_{i}^{-} / \tau)}
+```
 
 ****
 
