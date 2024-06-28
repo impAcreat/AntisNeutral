@@ -41,6 +41,7 @@
 > #### Combine input & Generate adj
 > * process and combine kmer and pssm input
 > * generate adj: adj is adjacency matrix, represent similarity between nodes
+> 
 > | input M           | input Dim | Layer \|\| func                    | output Dim | output M              |
 > | ----------------- | --------- | ---------------------------------- | ---------- | --------------------- |
 > | ft_dict_kmer      | [n, kmer] | antibody_kmer_linear               | [n, h]     | antibody_node_kmer_ft |
