@@ -3,6 +3,9 @@
 * based on GCNs, GATs, MLP
 
 ****
+## Current Key: how to process amino string to graph?
+
+****
 ## Basics & Thinking
 
 ### DeepAAI
@@ -25,8 +28,11 @@
   * contrastive learning: GCN and GAT
 
 
-### 
-
+### MCGCL-DTA
+#### Basic
+* genarate affinity graph
+* use GCN and GAT to process the graph
+* contrastive learning
 
 ****
 
