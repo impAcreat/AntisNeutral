@@ -97,6 +97,28 @@
 
 
 
+## Appendix
+
+### ELU
+
+$$
+\text{ELU}(x) = 
+\begin{cases} 
+x & \text{if } x > 0 \\
+\alpha (\exp(x) - 1) & \text{if } x \leq 0
+\end{cases}
+$$
+
+* $ \alpha $ 往往默认为1
+* 特点：
+  * **避免神经元死区**：与 ReLU（Rectified Linear Unit）不同，ELU 在输入小于零时仍有输出，这可以避免 ReLU 中的神经元死区问题（即输入始终为负时，梯度为零，神经元无法更新）
+  * **带有负值的平滑输出**：ELU 的负值部分是平滑的指数函数，这可以使模型在训练时更稳定，并加速收敛
+  * **零均值特性**：ELU 在输入均匀分布时，输出均值更接近于零，这有助于降低偏置偏差，从而提高模型的性能
+
+​	
+
+
+
 ## My Question
 
 1. 在做Laplacian前，需要找到和unseen关联的seen Abs，如何找？
