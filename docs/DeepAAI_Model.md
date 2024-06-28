@@ -4,7 +4,7 @@
 
 > Code: deep_aai_kmer_pssm_embedding_cls
 
-### Layers
+### Layers(global ft)
 
 * \__init__()
 
@@ -19,6 +19,8 @@
 | share_gcn2           | h             | h             |      |
 | antibody_adj_trans   | h             | h             |      |
 | virus_adj_trans      | h             | h             |      |
+| global_linear        | 2*h           | h             |      |
+| pred_linear          | h             | 1             |      |
 
 > specific:
 >
@@ -27,7 +29,7 @@
 > * pssm_antibody_dim:  840
 > * pssm_virus_dim:  420
 
-### Dim transformation
+### Dim transformation(global ft)
 
 * forward()
 
@@ -55,11 +57,11 @@
 >
 > * use 2 gcn to generate nodes representation based on graph
 >
-> | input M       | input Dim       | Layer \|\| func     | output M | output M      |
-> | ------------- | --------------- | ------------------- | -------- | ------------- |
-> | adj & node_ft | [n, n] & [n, h] | share_gcn1          | [n, h]   | node_ft(res*) |
-> |               |                 | ->activate->dropout |          |               |
-> | adj & node_ft | [n, n] & [n, h] | share_gcn2          | [n, h]   | node_ft(res*) |
+> | input M       | input Dim       | Layer \|\| func     | output Dim | output M      |
+> | ------------- | --------------- | ------------------- | ---------- | ------------- |
+> | adj & node_ft | [n, n] & [n, h] | share_gcn1          | [n, h]     | node_ft(res*) |
+> |               |                 | ->activate->dropout |            |               |
+> | adj & node_ft | [n, n] & [n, h] | share_gcn2          | [n, h]     | node_ft(res*) |
 > 
 
 > #### GCN conv
@@ -90,8 +92,52 @@
 
 > ### Global feature
 >
-> | input M          | input Dim  | Layer \|\| func | output M  | output M       |
-> | ---------------- | ---------- | --------------- | --------- | -------------- |
-> | antibody_res_mat | [n, h]     | [index]         | [n', h]   | res_mat        |
-> | virus_res_mat    |            |                 |           |                |
-> | 2_res_mat        | 2 * [n, h] | cat             | [n', 2*h] | global_pair_ft |
+> * n' represent batch_size
+>
+> | input M          | input Dim   | Layer \|\| func | output Dim | output M       |
+> | ---------------- | ----------- | --------------- | ---------- | -------------- |
+> | antibody_res_mat | [n, h]      | [index]         | [n', h]    | res_mat        |
+> | virus_res_mat    | ...         | ...             | ...        | ...            |
+> | 2_res_mat        | 2 * [n', h] | cat             | [n', 2*h]  | global_pair_ft |
+> |                  |             | -> activate     |            |                |
+> |                  |             | -> dropout      |            |                |
+> | global_pair_ft   | [n', 2*h]   | global_linear   | [n', h]    | global_pair_ft |
+
+****
+
+
+
+### Layers(local ft)
+
+| Layer | in_features          | out_features |
+| ----- | -------------------- | ------------ |
+| CNN1  | antibody_max_len * l | h (512)      |
+| CNN2  | virus_max_len * l    | h (512)      |
+
+
+
+### Dim transformation(local ft)
+
+* forward()
+
+> ### CNN
+>
+> * use cnn to antibody/virus feature from their amino feature
+>
+> | input M       | input Dim         | Layer \|\| func | output Dim        | output M      |
+> | ------------- | ----------------- | --------------- | ----------------- | ------------- |
+> | (a/v)amino_ft | [n', max_len, l]  | view            | [n', max_len * l] | (a/v)amino_ft |
+> | a_amino_ft    | [n', max_len * l] | cnn1            | [n', h]           | a_ft          |
+> | v_amino_ft    |                   | cnn2            |                   | v_ft          |
+> | a/v_ft        | 2 * [n', h]       | cat             | [n', 2*h]         | local_pair_ft |
+> |               |                   |                 |                   |               |
+>
+
+>
+> ### Local feature
+> | input M       | input Dim | Layer \|\| func | output Dim | output M      |
+> | ------------- | --------- | --------------- | ---------- | ------------- |
+> |               |           | activate        |            |               |
+> | local_pair_ft | [n', 2*h] | linear          | [n', h]    | local_pair_ft |
+> |               |           | activate        |            |               |
+> | local_pair_ft | [n', h]   | linear          | [n', h]    | local_pair_ft |
