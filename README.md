@@ -7,7 +7,7 @@
 
 ****
 ## Basics & Thinking
-
+**the notes and analysis of model are in ./docs/**
 ### DeepAAI
 #### Basics
 * DeepAII combine local feature and global feature
