@@ -1,0 +1,6 @@
+dataset/corpus/
+
+processing/hiv_cls/corpus/
+processing/hiv_cls/pssm/
+
+*.xlsx

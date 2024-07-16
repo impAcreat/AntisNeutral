@@ -119,8 +119,3 @@ $$
 
 
 
-## My Question
-
-1. 在做Laplacian前，需要找到和unseen关联的seen Abs，如何找？
-2. 
-
