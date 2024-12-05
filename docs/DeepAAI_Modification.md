@@ -24,7 +24,7 @@
 
 #### 先DeepAAI，再用GCN、GAT处理二分图，是否重复？
 
-> 不重复，
+> 不重复（？？）
 >
 > DeepAAI的图结构是Abs关系图，Ags关系图，重点是提取出node ft
 >

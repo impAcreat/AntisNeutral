@@ -4,25 +4,16 @@
 
 ****
 
-## Current
-
-* 感觉对氨基酸链的预处理获得的信息包括：词频信息、索引信息、one-hot，不知道够不够
-
-
-
-## OurWork
-
-
-
 ## Docs
-* constrct models
-  * preprocess：./docs/Preprocess.md
-  * generate graph
+**Include notes and code analysis**
+* basic knowledge: GATs, GCNs...
 
-* train code
-* predict code
-* run & debug
-* experiment
+* DeepAAI:
+  * DeepAAI.md: note of original paper
+  * DeepAAI_Model.md: understanding of original DeepAAI model & dimension change
+  * DeepAAI_Modification.md: my modification to model
+
+* Preprocess: conclusion of the way to preprocess antis
 
 ****
 
@@ -36,22 +27,22 @@
   * 7.17: combine the model
 
 * 7.18: train code
-* 7.19: try to train
+* 7.22: train
 
 ### Experiment
 
+...
 
 ### Conclusion
 
+...
 
 ### ...
 
 
 ****
 
-## Basics & Thinking
-
-**the notes and analysis of model are in ./docs/**
+## Analysis to Basic Models & Thinking
 
 ### DeepAAI
 
