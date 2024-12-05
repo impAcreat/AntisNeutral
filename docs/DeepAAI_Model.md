@@ -110,10 +110,12 @@
 
 ### Layers(local ft)
 
-| Layer | in_features          | out_features |
-| ----- | -------------------- | ------------ |
-| CNN1  | antibody_max_len * l | h (512)      |
-| CNN2  | virus_max_len * l    | h (512)      |
+| Layer         | in_features          | out_features |
+| ------------- | -------------------- | ------------ |
+| CNN1          | antibody_max_len * l | h (512)      |
+| CNN2          | virus_max_len * l    | h (512)      |
+| local_linear1 | 2*h                  | h            |
+| local_linear2 | h                    | h            |
 
 
 
@@ -123,7 +125,7 @@
 
 > ### CNN
 >
-> * use cnn to antibody/virus feature from their amino feature
+> * use cnn to extract antibody/virus feature from their amino feature
 >
 > | input M       | input Dim         | Layer \|\| func | output Dim        | output M      |
 > | ------------- | ----------------- | --------------- | ----------------- | ------------- |

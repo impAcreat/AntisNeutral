@@ -1,22 +1,15 @@
 ## Method
 
-### 局部特征
+--7.17--
 
-* MLP、transformer
-* 关注点信息
+* 模型分为3个部分：
 
-### 全局特征
+  1. AntisEmbed：提取Antibody和Antigen的特征
+  2. AffinityGraphGenerator：二分图生成
 
-* GCNs，GATs
-* 关注图结构信息
-
-### 对比学习
-
-* 模态对齐
-
-### 图类型
-
-* 使用GCN和GAT时，往往使用同构图，可否使用异构图？
+  3. GCN & GAT process：处理二分图
+  4. CL：对比学习
+  5. Predictor：预测中和性能
 
 
 

@@ -7,34 +7,6 @@ import pickle
 
 import os.path as osp
 
-
-def k_mer_ft_generate(raw_protein_list, trans_type='prob', min_df=1):
-    trans_protein_list = split_protein_str(raw_protein_list)
-    vectorizer = CountVectorizer(ngram_range=(1, 3), token_pattern=r'\b\w+\b', min_df=min_df)
-    count_mat = vectorizer.fit_transform(trans_protein_list)
-    count_mat = count_mat.toarray()
-
-    if trans_type == 'std':
-        stand_scaler = StandardScaler()
-        stand_scaler.fit(count_mat)
-        count_mat = stand_scaler.transform(count_mat)
-
-    elif trans_type == 'prob':
-        count_mat = count_mat / np.sum(count_mat, axis=0)
-
-    return count_mat
-
-def split_protein_str(raw_protein_list):
-    trans_protein_list = []
-    for raw_str in raw_protein_list:
-        trans_str = ''
-        for char in raw_str:
-            amino_idx = amino_map_idx[char]
-            trans_str = trans_str + ' ' + str(amino_idx)
-        trans_protein_list.append(trans_str)
-    return trans_protein_list
-
-
 class KmerTranslator(object):
     def __init__(self, trans_type='std', min_df=1, name=''):
         self.obj_name = name
@@ -78,8 +50,10 @@ class KmerTranslator(object):
 
     def fit_transform(self, protein_char_list):
         protein_list = self.split_protein_str(protein_char_list)
+        
         ft_mat = self.vectorizer.fit_transform(protein_list)
         ft_mat = ft_mat.toarray()
+        
         self.stand_scaler.fit(ft_mat)
         self.count_mat = ft_mat / np.sum(ft_mat, axis=0)
 

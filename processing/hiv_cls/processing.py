@@ -75,6 +75,7 @@ def processing():
     # k-mer-whole
     kmer_translator = KmerTranslator(trans_type='std', min_df=kmer_min_df, name=dataset_param_str)
     protein_ft = kmer_translator.fit_transform(raw_all_antibody_set + raw_all_virus_set)
+    
     # kmer_translator.save()
     protein_ft_dict['antibody_kmer_whole'] = protein_ft[0: len(raw_all_antibody_set)]
     protein_ft_dict['virus_kmer_whole'] = protein_ft[len(raw_all_antibody_set):]
